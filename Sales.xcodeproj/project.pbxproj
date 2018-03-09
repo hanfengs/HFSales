@@ -14,6 +14,15 @@
 		6A7B1538204FF92200EFC9B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A7B1536204FF92200EFC9B8 /* LaunchScreen.storyboard */; };
 		6A7B153B204FF92200EFC9B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7B153A204FF92200EFC9B8 /* main.m */; };
 		6A7B1542204FF9A300EFC9B8 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A7B1541204FF9A300EFC9B8 /* libsqlite3.0.tbd */; };
+		6A7B1559205290B900EFC9B8 /* DLLRUCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7B1549205290B900EFC9B8 /* DLLRUCache.m */; };
+		6A7B155A205290B900EFC9B8 /* DLTabedSlideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7B154F205290B900EFC9B8 /* DLTabedSlideView.m */; };
+		6A7B155B205290B900EFC9B8 /* DLScrollTabbarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7B1554205290B900EFC9B8 /* DLScrollTabbarView.m */; };
+		6A7B155C205290B900EFC9B8 /* DLFixedTabbarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7B1555205290B900EFC9B8 /* DLFixedTabbarView.m */; };
+		6A7B155D205290B900EFC9B8 /* DLUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7B1556205290B900EFC9B8 /* DLUtility.m */; };
+		6A7B155E205290B900EFC9B8 /* DLCustomSlideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7B1557205290B900EFC9B8 /* DLCustomSlideView.m */; };
+		6A7B155F205290B900EFC9B8 /* DLSlideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7B1558205290B900EFC9B8 /* DLSlideView.m */; };
+		6A7B1563205291BC00EFC9B8 /* SaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7B1561205291BC00EFC9B8 /* SaleViewController.m */; };
+		6A7B1564205291BC00EFC9B8 /* SaleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A7B1562205291BC00EFC9B8 /* SaleViewController.xib */; };
 		E8B5ACD27C4F0723D346A9D6 /* libPods-Sales.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22360110F247C8FDEBC1A135 /* libPods-Sales.a */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +41,25 @@
 		6A7B1539204FF92200EFC9B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A7B153A204FF92200EFC9B8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6A7B1541204FF9A300EFC9B8 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		6A7B1547205290B900EFC9B8 /* DLTabedSlideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLTabedSlideView.h; sourceTree = "<group>"; };
+		6A7B1549205290B900EFC9B8 /* DLLRUCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLLRUCache.m; sourceTree = "<group>"; };
+		6A7B154A205290B900EFC9B8 /* DLCacheProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLCacheProtocol.h; sourceTree = "<group>"; };
+		6A7B154B205290B900EFC9B8 /* DLLRUCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLLRUCache.h; sourceTree = "<group>"; };
+		6A7B154C205290B900EFC9B8 /* DLUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLUtility.h; sourceTree = "<group>"; };
+		6A7B154D205290B900EFC9B8 /* DLSlideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSlideView.h; sourceTree = "<group>"; };
+		6A7B154E205290B900EFC9B8 /* DLCustomSlideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLCustomSlideView.h; sourceTree = "<group>"; };
+		6A7B154F205290B900EFC9B8 /* DLTabedSlideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLTabedSlideView.m; sourceTree = "<group>"; };
+		6A7B1551205290B900EFC9B8 /* DLSlideTabbarProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSlideTabbarProtocol.h; sourceTree = "<group>"; };
+		6A7B1552205290B900EFC9B8 /* DLScrollTabbarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLScrollTabbarView.h; sourceTree = "<group>"; };
+		6A7B1553205290B900EFC9B8 /* DLFixedTabbarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLFixedTabbarView.h; sourceTree = "<group>"; };
+		6A7B1554205290B900EFC9B8 /* DLScrollTabbarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLScrollTabbarView.m; sourceTree = "<group>"; };
+		6A7B1555205290B900EFC9B8 /* DLFixedTabbarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLFixedTabbarView.m; sourceTree = "<group>"; };
+		6A7B1556205290B900EFC9B8 /* DLUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLUtility.m; sourceTree = "<group>"; };
+		6A7B1557205290B900EFC9B8 /* DLCustomSlideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLCustomSlideView.m; sourceTree = "<group>"; };
+		6A7B1558205290B900EFC9B8 /* DLSlideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSlideView.m; sourceTree = "<group>"; };
+		6A7B1560205291BC00EFC9B8 /* SaleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaleViewController.h; sourceTree = "<group>"; };
+		6A7B1561205291BC00EFC9B8 /* SaleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaleViewController.m; sourceTree = "<group>"; };
+		6A7B1562205291BC00EFC9B8 /* SaleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaleViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,17 +105,68 @@
 		6A7B152A204FF92200EFC9B8 /* Sales */ = {
 			isa = PBXGroup;
 			children = (
+				6A7B15452052909000EFC9B8 /* Vender */,
 				6A7B152B204FF92200EFC9B8 /* AppDelegate.h */,
 				6A7B152C204FF92200EFC9B8 /* AppDelegate.m */,
 				6A7B152E204FF92200EFC9B8 /* ViewController.h */,
 				6A7B152F204FF92200EFC9B8 /* ViewController.m */,
 				6A7B1531204FF92200EFC9B8 /* Main.storyboard */,
+				6A7B1560205291BC00EFC9B8 /* SaleViewController.h */,
+				6A7B1561205291BC00EFC9B8 /* SaleViewController.m */,
+				6A7B1562205291BC00EFC9B8 /* SaleViewController.xib */,
 				6A7B1534204FF92200EFC9B8 /* Assets.xcassets */,
 				6A7B1536204FF92200EFC9B8 /* LaunchScreen.storyboard */,
 				6A7B1539204FF92200EFC9B8 /* Info.plist */,
 				6A7B153A204FF92200EFC9B8 /* main.m */,
 			);
 			path = Sales;
+			sourceTree = "<group>";
+		};
+		6A7B15452052909000EFC9B8 /* Vender */ = {
+			isa = PBXGroup;
+			children = (
+				6A7B1546205290B900EFC9B8 /* DLSlideView */,
+			);
+			path = Vender;
+			sourceTree = "<group>";
+		};
+		6A7B1546205290B900EFC9B8 /* DLSlideView */ = {
+			isa = PBXGroup;
+			children = (
+				6A7B1547205290B900EFC9B8 /* DLTabedSlideView.h */,
+				6A7B1548205290B900EFC9B8 /* DLCache */,
+				6A7B154C205290B900EFC9B8 /* DLUtility.h */,
+				6A7B154D205290B900EFC9B8 /* DLSlideView.h */,
+				6A7B154E205290B900EFC9B8 /* DLCustomSlideView.h */,
+				6A7B154F205290B900EFC9B8 /* DLTabedSlideView.m */,
+				6A7B1550205290B900EFC9B8 /* DLTabbarView */,
+				6A7B1556205290B900EFC9B8 /* DLUtility.m */,
+				6A7B1557205290B900EFC9B8 /* DLCustomSlideView.m */,
+				6A7B1558205290B900EFC9B8 /* DLSlideView.m */,
+			);
+			path = DLSlideView;
+			sourceTree = "<group>";
+		};
+		6A7B1548205290B900EFC9B8 /* DLCache */ = {
+			isa = PBXGroup;
+			children = (
+				6A7B1549205290B900EFC9B8 /* DLLRUCache.m */,
+				6A7B154A205290B900EFC9B8 /* DLCacheProtocol.h */,
+				6A7B154B205290B900EFC9B8 /* DLLRUCache.h */,
+			);
+			path = DLCache;
+			sourceTree = "<group>";
+		};
+		6A7B1550205290B900EFC9B8 /* DLTabbarView */ = {
+			isa = PBXGroup;
+			children = (
+				6A7B1551205290B900EFC9B8 /* DLSlideTabbarProtocol.h */,
+				6A7B1552205290B900EFC9B8 /* DLScrollTabbarView.h */,
+				6A7B1553205290B900EFC9B8 /* DLFixedTabbarView.h */,
+				6A7B1554205290B900EFC9B8 /* DLScrollTabbarView.m */,
+				6A7B1555205290B900EFC9B8 /* DLFixedTabbarView.m */,
+			);
+			path = DLTabbarView;
 			sourceTree = "<group>";
 		};
 		A31BB40A4303D530BBAFE551 /* Frameworks */ = {
@@ -163,6 +242,7 @@
 				6A7B1538204FF92200EFC9B8 /* LaunchScreen.storyboard in Resources */,
 				6A7B1535204FF92200EFC9B8 /* Assets.xcassets in Resources */,
 				6A7B1533204FF92200EFC9B8 /* Main.storyboard in Resources */,
+				6A7B1564205291BC00EFC9B8 /* SaleViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,8 +305,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A7B1530204FF92200EFC9B8 /* ViewController.m in Sources */,
+				6A7B155A205290B900EFC9B8 /* DLTabedSlideView.m in Sources */,
+				6A7B155F205290B900EFC9B8 /* DLSlideView.m in Sources */,
+				6A7B155D205290B900EFC9B8 /* DLUtility.m in Sources */,
 				6A7B153B204FF92200EFC9B8 /* main.m in Sources */,
+				6A7B155E205290B900EFC9B8 /* DLCustomSlideView.m in Sources */,
+				6A7B1563205291BC00EFC9B8 /* SaleViewController.m in Sources */,
+				6A7B1559205290B900EFC9B8 /* DLLRUCache.m in Sources */,
 				6A7B152D204FF92200EFC9B8 /* AppDelegate.m in Sources */,
+				6A7B155B205290B900EFC9B8 /* DLScrollTabbarView.m in Sources */,
+				6A7B155C205290B900EFC9B8 /* DLFixedTabbarView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
