@@ -23,8 +23,9 @@
 
 @property (nonatomic, copy) NSString *VIEWSTATE;
 @property (nonatomic, copy) NSString *GUID;
-@property (nonatomic, copy)NSString *VIEWSTATE3;
-@property (nonatomic, copy)NSString *PREVIOUSPAGE3;
+@property (nonatomic, copy) NSString *VIEWSTATE3;
+@property (nonatomic, copy) NSString *PREVIOUSPAGE3;
+@property (nonatomic, strong) NSDictionary *param;
 
 @property (nonatomic, strong) UIButton *titleButton;
 @property (nonatomic, assign) BOOL is_open;
@@ -43,11 +44,12 @@
 //    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
 //    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 //    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorNamed:@"NavColor"]];
+    
     self.view.backgroundColor = [UIColor colorNamed:@"BgColor"];
     
     shopArr = @[@"0000 永旺（北京)", @"1001 国际商城店", @"1002 朝北大悦城店", @"1003 天津泰达店",@"1004 天津中北店", @"1005 天津梅江店", @"1006 丰台店",@"1007 河北燕郊店", @"1008 天津天河城店", @"1009 天津津南店",@"1995 国际商城店(外仓2)", @"1996 北京永旺低温物流中心", @"1997 国际商城店(外仓)",@"1998 虚拟店铺", @"1999 北京永旺物流中心"];
     
-//    [self loadSignIn];
+    [self loadSignIn];
 //    [self postSignIn];
     
     [self setupNavTitle];
@@ -55,7 +57,6 @@
 }
 
 #pragma mark- subVC
-
 - (void)setupSubVC{
     self.tabedSlideView.baseViewController = self;
     self.tabedSlideView.tabItemNormalColor = [UIColor blackColor];
@@ -253,12 +254,87 @@
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
         NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"%@", string);
-        
-        
+        self.param = [self paramFormSales1:string];
         
     }] resume];
 
+}
+
+- (NSDictionary *)paramFormSales1:(NSString *)str{
+    
+    NSMutableDictionary *dictM = [NSMutableDictionary dictionary];
+    
+    NSArray *arr1 = [str componentsSeparatedByString:@"Sales1.aspx?GUID="];
+    if (arr1.count > 0) {
+        NSArray *arr = [arr1.lastObject componentsSeparatedByString:@"\" id="];
+        if (arr.count > 0) {
+            NSString *string = arr.firstObject;
+            [dictM setValue:string forKey:@"GUID"];
+        }
+    }
+    
+    NSArray *arr2 = [str componentsSeparatedByString:@"__VIEWSTATE\" value=\""];
+    if (arr2.count > 0) {
+        NSArray *arr = [arr2.lastObject componentsSeparatedByString:@"\" />"];
+        if (arr.count > 0) {
+            NSString *string = arr.firstObject;
+            [dictM setValue:string forKey:@"__VIEWSTATE"];
+        }
+    }
+    
+    NSArray *arr3 = [str componentsSeparatedByString:@"__PREVIOUSPAGE\" value=\""];
+    if (arr3.count > 0) {
+        NSArray *arr = [arr3.lastObject componentsSeparatedByString:@"\" />"];
+        if (arr.count > 0) {
+            NSString *string = arr.firstObject;
+            [dictM setValue:string forKey:@"__PREVIOUSPAGE"];
+        }
+    }
+    
+    NSArray *cookiesArray = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+    NSDictionary *cookieDict = [NSHTTPCookie requestHeaderFieldsWithCookies:cookiesArray];
+    NSString *cookie = [cookieDict objectForKey:@"Cookie"];
+    
+    NSArray *arr4 = [cookie componentsSeparatedByString:@"ASP.NET_SessionId="];
+    if (arr4.count > 0) {
+        NSString *string = arr4.lastObject;
+        [dictM setValue:string forKey:@"sessionId"];
+    }
+    
+    return dictM.copy;
+}
+
+- (void)setParam:(NSDictionary *)param{
+    _param = param;
+    [self postSales2];
+}
+
+- (void)postSales2{
+    
+    NSString *urlStr = [NSString stringWithFormat:@"http://www.aeonweb.cn/AeonABJ/Pages/Sales2.aspx?GUID=%@", self.param[@"GUID"]];
+    NSURL *url = [NSURL URLWithString:urlStr];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    NSString *paraStr = [NSString stringWithFormat:@"__EVENTTARGET=""&__EVENTARGUMENT=""&__VIEWSTATE=%@&__PREVIOUSPAGE=%@&ShopList1$ddlShopList=1007&Txt_OrderDate1=2018/03/11&Txt_OrderDate2=2018/03/12&Txt_ITCO1=""&Txt_ITCO2=""&btnSearch=查询(SEARCH)", self.param[@"__VIEWSTATE"], self.param[@"__PREVIOUSPAGE"]];
+    
+    
+    NSString *para1 = [paraStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    //[para4 stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    
+    NSString *para2 = [para1 stringByReplacingOccurrencesOfString:@"/" withString:@"%2F"];
+    NSString *para3 = [para2 stringByReplacingOccurrencesOfString:@"+" withString:@"%2B"];
+    NSString *para4 = [para3 stringByReplacingOccurrencesOfString:@"(" withString:@"%28"];
+    NSString *para5 = [para4 stringByReplacingOccurrencesOfString:@")" withString:@"%29"];
+    
+    request.HTTPMethod = @"POST";
+    request.HTTPBody = [para5 dataUsingEncoding:NSUTF8StringEncoding];
+    
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@", string);
+        
+    }] resume];
 }
 
 #pragma mark- 测试
