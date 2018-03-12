@@ -10,6 +10,7 @@
 #import "PPNetworkHelper.h"
 #import "DLTabedSlideView.h"
 #import "SaleViewController.h"
+#import "Ono.h"
 
 #define TxtUser @"1000000006"
 #define TxtPassword @"111111"
@@ -335,6 +336,11 @@
         NSLog(@"%@", string);
         
     }] resume];
+}
+
+#pragma mark- html解析
+- (void)html{
+    
 }
 
 #pragma mark- 测试
