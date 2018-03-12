@@ -27,6 +27,8 @@
 @property (nonatomic, copy) NSString *VIEWSTATE3;
 @property (nonatomic, copy) NSString *PREVIOUSPAGE3;
 @property (nonatomic, strong) NSDictionary *param;
+@property (nonatomic, strong) NSArray *costArr;
+@property (nonatomic, assign) NSString *total;
 
 @property (nonatomic, strong) UIButton *titleButton;
 @property (nonatomic, assign) BOOL is_open;
@@ -188,7 +190,7 @@
             NSArray *arr1 = [arr.lastObject componentsSeparatedByString:@"\" />"];
             if (arr1.count > 0) {
                 NSString *string = arr1.firstObject;
-                NSLog(@"%@", string);
+//                NSLog(@"%@", string);
                 self.VIEWSTATE = string;
             }
         }
@@ -233,7 +235,7 @@
             NSArray *arr1 = [arr.lastObject componentsSeparatedByString:@"\" id="];
             if (arr1.count > 0) {
                 NSString *string = arr1.firstObject;
-                NSLog(@"%@", string);
+//                NSLog(@"%@", string);
                 self.GUID = string;
             }
         }
@@ -332,15 +334,48 @@
     
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
-        NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"%@", string);
+//        NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        
+        [self html:data];
         
     }] resume];
 }
 
 #pragma mark- html解析
-- (void)html{
+- (void)html:(NSData *)data{
+
+    NSError *error;
+    ONOXMLDocument *document = [ONOXMLDocument HTMLDocumentWithData:data error:&error];
     
+    NSMutableArray *arrM = [NSMutableArray array];
+    
+    NSString *xpath = @"//body/form/table/tr";
+    [document enumerateElementsWithXPath:xpath usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
+        
+        NSLog(@"%@: %@===%@", element.tag, element.attributes, [element stringValue]);
+        
+        NSArray *arr = element.children;
+        ONOXMLElement *celement = arr[5];
+        
+        NSString *cost = [celement stringValue];
+        if (![cost isEqualToString:@"金额"]) {
+            [arrM addObject:[celement stringValue]];
+        }
+    }];
+    
+    self.costArr = arrM.copy;
+}
+
+- (void)setCostArr:(NSArray *)costArr{
+    _costArr = costArr;
+    
+    double sum = 0.0;
+    for (NSInteger i = 0; i < costArr.count; i++) {
+        
+        double cost = [costArr[i] doubleValue];
+        sum = sum + cost;
+    }
+    self.total = [NSString stringWithFormat:@"%.2f", sum];
 }
 
 #pragma mark- 测试
@@ -352,7 +387,7 @@
     NSString *x = [NSString stringWithFormat:@"%u", arc4random_uniform(random)];
     NSString *y = [NSString stringWithFormat:@"%u", arc4random_uniform(random)];
     
-    NSString *para = [NSString stringWithFormat:@"__VIEWSTATE=%@&TxtUser=%@&TxtPassword=%@&btnLogin.x=%@&btnLogin.y=%@", self.VIEWSTATE, TxtUser, TxtPassword, x, y];
+//    NSString *para = [NSString stringWithFormat:@"__VIEWSTATE=%@&TxtUser=%@&TxtPassword=%@&btnLogin.x=%@&btnLogin.y=%@", self.VIEWSTATE, TxtUser, TxtPassword, x, y];
     
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
                            self.VIEWSTATE, @"__VIEWSTATE",
