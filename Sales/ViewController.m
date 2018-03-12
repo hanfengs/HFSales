@@ -31,10 +31,14 @@
 @property (nonatomic, assign) NSString *total;
 
 @property (nonatomic, strong) UIButton *titleButton;
+@property (nonatomic, copy) NSString *currentShopCode;
+
 @property (nonatomic, assign) BOOL is_open;
 @property (nonatomic, strong) UITableView *shopTableView;
 
 @property (strong, nonatomic) DLTabedSlideView *tabedSlideView;
+@property (nonatomic, strong) SaleViewController *dayVC;
+
 @end
 
 @implementation ViewController{
@@ -49,7 +53,7 @@
 //    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorNamed:@"NavColor"]];
     
     self.view.backgroundColor = [UIColor colorNamed:@"BgColor"];
-    
+    self.currentShopCode = @"0000";
     shopArr = @[@"0000 永旺（北京)", @"1001 国际商城店", @"1002 朝北大悦城店", @"1003 天津泰达店",@"1004 天津中北店", @"1005 天津梅江店", @"1006 丰台店",@"1007 河北燕郊店", @"1008 天津天河城店", @"1009 天津津南店",@"1995 国际商城店(外仓2)", @"1996 北京永旺低温物流中心", @"1997 国际商城店(外仓)",@"1998 虚拟店铺", @"1999 北京永旺物流中心"];
     
     [self loadSignIn];
@@ -85,6 +89,7 @@
     switch (index) {
         case 0:{
             SaleViewController *ctrl = [[SaleViewController alloc] init];
+            self.dayVC = ctrl;
 //                        ctrl.view.backgroundColor = [UIColor redColor];
             return ctrl;
         }
@@ -173,8 +178,15 @@
     NSString *title = shopArr[indexPath.row];
     [self.titleButton setTitle:title forState:UIControlStateNormal];
     
+    self.currentShopCode = [title substringToIndex:4];
+    
 #warning TODO
 }
+- (void)setCurrentShopCode:(NSString *)currentShopCode{
+    _currentShopCode = currentShopCode;
+    
+}
+
 #pragma mark- 网络
 - (void)loadSignIn{
     
@@ -194,14 +206,12 @@
                 self.VIEWSTATE = string;
             }
         }
-        
     }] resume];
     
 }
 
 - (void)setVIEWSTATE:(NSString *)VIEWSTATE{
     _VIEWSTATE = VIEWSTATE;
-    
     [self postSignIn];
 }
 
@@ -245,7 +255,6 @@
 
 - (void)setGUID:(NSString *)GUID{
     _GUID = GUID;
-    
     [self getSales1];
 }
 
@@ -260,7 +269,6 @@
         self.param = [self paramFormSales1:string];
         
     }] resume];
-
 }
 
 - (NSDictionary *)paramFormSales1:(NSString *)str{
@@ -378,6 +386,10 @@
     self.total = [NSString stringWithFormat:@"%.2f", sum];
 }
 
+- (void)setTotal:(NSString *)total{
+    _total = total;    
+    self.dayVC.total = total;
+}
 #pragma mark- 测试
 //框架会自动反序列化，而这里无法不是接口，从网页XML中提取
 - (void)postSignIn2{

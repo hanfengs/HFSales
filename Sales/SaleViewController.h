@@ -10,4 +10,6 @@
 
 @interface SaleViewController : UIViewController
 
+@property (nonatomic, copy) NSString *total;
+
 @end

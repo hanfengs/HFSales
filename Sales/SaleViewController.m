@@ -10,13 +10,46 @@
 
 @interface SaleViewController ()
 
+@property (weak, nonatomic) IBOutlet UITextField *tf_date;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_total;
+
+@property(nonatomic,weak)UIDatePicker *myDatePicker;
+
 @end
 
 @implementation SaleViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    self.tf_date.text = [self getCurrentTime];
+    self.tf_date.textColor = [UIColor colorNamed:@"NavColor"];
+    
+    UIDatePicker *picker = [[UIDatePicker alloc]init];
+    picker.datePickerMode =  UIDatePickerModeDate;
+    picker.locale = [NSLocale localeWithLocaleIdentifier:@"zh-Hans"];
+    self.tf_date.inputView = picker;
+    self.myDatePicker = picker;
+}
+
+- (void)setTotal:(NSString *)total{
+    _total = total;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+    
+        self.lbl_total.text = [NSString stringWithFormat:@"总金额：%@", total];
+    });
+}
+- (IBAction)clickBtnTotal:(id)sender {
+    
+}
+
+- (NSString *)getCurrentTime {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.locale = [NSLocale localeWithLocaleIdentifier:@"en"];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateTime = [formatter stringFromDate:[NSDate date]];
+    return dateTime;
 }
 
 - (void)didReceiveMemoryWarning {

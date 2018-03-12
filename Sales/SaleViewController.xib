@@ -6,12 +6,15 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SaleViewController">
             <connections>
+                <outlet property="lbl_total" destination="1kA-EL-Xfd" id="pKa-hz-0ge"/>
+                <outlet property="tf_date" destination="gRH-Tj-YAb" id="ahi-ce-ah9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,23 +23,52 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gRH-Tj-YAb">
+                    <rect key="frame" x="173.5" y="50" width="28" height="40"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1kA-EL-Xfd">
+                    <rect key="frame" x="188" y="333.5" width="0.0" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <color key="textColor" name="totalColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWJ-gH-i9H">
-                    <rect key="frame" x="20" y="318" width="335" height="30"/>
-                    <color key="backgroundColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
+                    <rect key="frame" x="20" y="120" width="335" height="50"/>
+                    <color key="backgroundColor" name="NavColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="ku1-Sj-bf4"/>
+                        <constraint firstAttribute="height" constant="50" id="ku1-Sj-bf4"/>
                     </constraints>
-                    <state key="normal" title="Button"/>
+                    <state key="normal" title="计算该日销售总金额">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="clickBtnTotal:" destination="-1" eventType="touchUpInside" id="DwG-NQ-2D0"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="1kA-EL-Xfd" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="H5H-zx-tpL"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="TWJ-gH-i9H" secondAttribute="trailing" constant="20" id="M8n-HL-96b"/>
-                <constraint firstItem="TWJ-gH-i9H" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="UNu-3m-QKr"/>
-                <constraint firstItem="TWJ-gH-i9H" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="UjD-Ty-ccr"/>
                 <constraint firstItem="TWJ-gH-i9H" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="Z3h-E7-7i2"/>
+                <constraint firstItem="1kA-EL-Xfd" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="aeu-Rj-jJW"/>
+                <constraint firstItem="gRH-Tj-YAb" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="30" id="hTn-VC-Bzv"/>
+                <constraint firstItem="gRH-Tj-YAb" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="i6W-Ur-uZz"/>
+                <constraint firstItem="TWJ-gH-i9H" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="rU1-Bg-tKh"/>
+                <constraint firstItem="TWJ-gH-i9H" firstAttribute="top" secondItem="gRH-Tj-YAb" secondAttribute="bottom" constant="30" id="tQo-aR-MKf"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
         </view>
     </objects>
+    <resources>
+        <namedColor name="NavColor">
+            <color red="0.18823529411764706" green="0.22745098039215686" blue="0.6470588235294118" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="totalColor">
+            <color red="0.98431372549019602" green="0.13333333333333333" blue="0.43137254901960786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
