@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SaleViewControllerDelegate<NSObject>
+
+- (void)changeDateValues:(NSString *)dateStr;
+- (void)calculateTotal;
+@end
+
 @interface SaleViewController : UIViewController
 
 @property (nonatomic, copy) NSString *total;
+@property (nonatomic, weak) id<SaleViewControllerDelegate> delegate;
 
 @end

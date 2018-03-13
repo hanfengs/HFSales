@@ -13,7 +13,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *tf_date;
 @property (weak, nonatomic) IBOutlet UILabel *lbl_total;
 
-@property(nonatomic,weak)UIDatePicker *myDatePicker;
+@property(nonatomic,weak) UIDatePicker *myDatePicker;
 
 @end
 
@@ -22,14 +22,37 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tf_date.text = [self getCurrentTime];
+    self.tf_date.text = [self getCurrentTime:[NSDate date]];
     self.tf_date.textColor = [UIColor colorNamed:@"NavColor"];
     
     UIDatePicker *picker = [[UIDatePicker alloc]init];
     picker.datePickerMode =  UIDatePickerModeDate;
     picker.locale = [NSLocale localeWithLocaleIdentifier:@"zh-Hans"];
+    [picker addTarget:self action:@selector(DatePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
+    
     self.tf_date.inputView = picker;
     self.myDatePicker = picker;
+    
+    [self setCurrentDate:[NSDate date]];
+}
+
+- (void)DatePickerValueChanged:(UIDatePicker *)sender{
+    
+    NSComparisonResult result = [sender.date compare:[NSDate date]];
+    if (result != NSOrderedDescending) {
+        self.tf_date.text = [self getCurrentTime:sender.date];
+        
+        [self setCurrentDate:sender.date];
+    }
+}
+
+- (void)setCurrentDate:(NSDate *)date{
+    
+    NSString *dateStr1 = [self getCurrentTime:date];
+    NSString *dateStr2 = [dateStr1 stringByReplacingOccurrencesOfString:@"-" withString:@"/"];
+    if ([self.delegate respondsToSelector:@selector(changeDateValues:)]) {
+        [self.delegate changeDateValues:dateStr2];
+    }
 }
 
 - (void)setTotal:(NSString *)total{
@@ -42,29 +65,21 @@
 }
 - (IBAction)clickBtnTotal:(id)sender {
     
+    if ([self.delegate respondsToSelector:@selector(calculateTotal)]) {
+        [self.delegate calculateTotal];
+    }
 }
 
-- (NSString *)getCurrentTime {
+- (NSString *)getCurrentTime:(NSDate *)date{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.locale = [NSLocale localeWithLocaleIdentifier:@"en"];
     [formatter setDateFormat:@"yyyy-MM-dd"];
-    NSString *dateTime = [formatter stringFromDate:[NSDate date]];
+    NSString *dateTime = [formatter stringFromDate:date];
     return dateTime;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end

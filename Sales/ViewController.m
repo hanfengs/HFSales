@@ -20,7 +20,7 @@
 #define kMainScreenWidth [UIScreen mainScreen].bounds.size.width
 #define KMainScreenHeight [UIScreen mainScreen].bounds.size.height
 
-@interface ViewController ()<UITableViewDelegate, UITableViewDataSource, DLTabedSlideViewDelegate>
+@interface ViewController ()<UITableViewDelegate, UITableViewDataSource, DLTabedSlideViewDelegate, SaleViewControllerDelegate>
 
 @property (nonatomic, copy) NSString *VIEWSTATE;
 @property (nonatomic, copy) NSString *GUID;
@@ -31,7 +31,6 @@
 @property (nonatomic, assign) NSString *total;
 
 @property (nonatomic, strong) UIButton *titleButton;
-@property (nonatomic, copy) NSString *currentShopCode;
 
 @property (nonatomic, assign) BOOL is_open;
 @property (nonatomic, strong) UITableView *shopTableView;
@@ -43,6 +42,8 @@
 
 @implementation ViewController{
     NSArray *shopArr;
+    NSString *_selectedDateStr;
+    NSString *_currentShopCode;
 }
 
 - (void)viewDidLoad {
@@ -53,7 +54,8 @@
 //    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorNamed:@"NavColor"]];
     
     self.view.backgroundColor = [UIColor colorNamed:@"BgColor"];
-    self.currentShopCode = @"0000";
+    _currentShopCode = @"0000";
+    
     shopArr = @[@"0000 永旺（北京)", @"1001 国际商城店", @"1002 朝北大悦城店", @"1003 天津泰达店",@"1004 天津中北店", @"1005 天津梅江店", @"1006 丰台店",@"1007 河北燕郊店", @"1008 天津天河城店", @"1009 天津津南店",@"1995 国际商城店(外仓2)", @"1996 北京永旺低温物流中心", @"1997 国际商城店(外仓)",@"1998 虚拟店铺", @"1999 北京永旺物流中心"];
     
     [self loadSignIn];
@@ -89,7 +91,9 @@
     switch (index) {
         case 0:{
             SaleViewController *ctrl = [[SaleViewController alloc] init];
+            ctrl.delegate = self;
             self.dayVC = ctrl;
+            
 //                        ctrl.view.backgroundColor = [UIColor redColor];
             return ctrl;
         }
@@ -178,13 +182,7 @@
     NSString *title = shopArr[indexPath.row];
     [self.titleButton setTitle:title forState:UIControlStateNormal];
     
-    self.currentShopCode = [title substringToIndex:4];
-    
-#warning TODO
-}
-- (void)setCurrentShopCode:(NSString *)currentShopCode{
-    _currentShopCode = currentShopCode;
-    
+    _currentShopCode = [title substringToIndex:4];
 }
 
 #pragma mark- 网络
@@ -317,7 +315,8 @@
 
 - (void)setParam:(NSDictionary *)param{
     _param = param;
-    [self postSales2];
+    
+//    [self postSales2];//拿到所有参数，可以获取销售数据了
 }
 
 - (void)postSales2{
@@ -326,8 +325,7 @@
     NSURL *url = [NSURL URLWithString:urlStr];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
-    NSString *paraStr = [NSString stringWithFormat:@"__EVENTTARGET=""&__EVENTARGUMENT=""&__VIEWSTATE=%@&__PREVIOUSPAGE=%@&ShopList1$ddlShopList=1007&Txt_OrderDate1=2018/03/12&Txt_OrderDate2=2018/03/12&Txt_ITCO1=""&Txt_ITCO2=""&btnSearch=查询(SEARCH)", self.param[@"__VIEWSTATE"], self.param[@"__PREVIOUSPAGE"]];
-    
+    NSString *paraStr = [NSString stringWithFormat:@"__EVENTTARGET=""&__EVENTARGUMENT=""&__VIEWSTATE=%@&__PREVIOUSPAGE=%@&ShopList1$ddlShopList=%@&Txt_OrderDate1=%@&Txt_OrderDate2=%@&Txt_ITCO1=""&Txt_ITCO2=""&btnSearch=查询(SEARCH)", self.param[@"__VIEWSTATE"], self.param[@"__PREVIOUSPAGE"], _currentShopCode, _selectedDateStr, _selectedDateStr];
     
     NSString *para1 = [paraStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     //[para4 stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
@@ -360,7 +358,7 @@
     NSString *xpath = @"//body/form/table/tr";
     [document enumerateElementsWithXPath:xpath usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
         
-        NSLog(@"%@: %@===%@", element.tag, element.attributes, [element stringValue]);
+//        NSLog(@"%@: %@===%@", element.tag, element.attributes, [element stringValue]);
         
         NSArray *arr = element.children;
         ONOXMLElement *celement = arr[5];
@@ -391,6 +389,16 @@
     _total = total;    
     self.dayVC.total = total;
 }
+
+#pragma mark-
+
+- (void)changeDateValues:(NSString *)dateStr{
+    _selectedDateStr = dateStr;
+}
+- (void)calculateTotal{
+    [self postSales2];
+}
+
 #pragma mark- 测试
 //框架会自动反序列化，而这里无法不是接口，从网页XML中提取
 - (void)postSignIn2{
