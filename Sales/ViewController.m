@@ -326,7 +326,7 @@
     NSURL *url = [NSURL URLWithString:urlStr];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
-    NSString *paraStr = [NSString stringWithFormat:@"__EVENTTARGET=""&__EVENTARGUMENT=""&__VIEWSTATE=%@&__PREVIOUSPAGE=%@&ShopList1$ddlShopList=0000&Txt_OrderDate1=2018/03/11&Txt_OrderDate2=2018/03/11&Txt_ITCO1=""&Txt_ITCO2=""&btnSearch=查询(SEARCH)", self.param[@"__VIEWSTATE"], self.param[@"__PREVIOUSPAGE"]];
+    NSString *paraStr = [NSString stringWithFormat:@"__EVENTTARGET=""&__EVENTARGUMENT=""&__VIEWSTATE=%@&__PREVIOUSPAGE=%@&ShopList1$ddlShopList=1007&Txt_OrderDate1=2018/03/12&Txt_OrderDate2=2018/03/12&Txt_ITCO1=""&Txt_ITCO2=""&btnSearch=查询(SEARCH)", self.param[@"__VIEWSTATE"], self.param[@"__PREVIOUSPAGE"]];
     
     
     NSString *para1 = [paraStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -367,7 +367,7 @@
         
         NSString *cost = [celement stringValue];
         if (![cost isEqualToString:@"金额"]) {
-            [arrM addObject:[celement numberValue]];
+            [arrM addObject:[celement stringValue]];
         }
     }];
     
@@ -377,13 +377,14 @@
 - (void)setCostArr:(NSArray *)costArr{
     _costArr = costArr;
     
-    double sum = 0.0;
+    NSDecimalNumber *sum = [[NSDecimalNumber alloc] initWithString:@"0"];
     for (NSInteger i = 0; i < costArr.count; i++) {
         
-        double cost = [costArr[i] doubleValue];
-        sum = sum + cost;
+        NSString *costStr = costArr[i];
+        NSDecimalNumber *dn = [NSDecimalNumber decimalNumberWithString:costStr];
+        sum = [sum decimalNumberByAdding:dn];
     }
-    self.total = [NSString stringWithFormat:@"%.2f", sum];
+    self.total = [NSString stringWithFormat:@"%@", sum];
 }
 
 - (void)setTotal:(NSString *)total{
