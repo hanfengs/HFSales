@@ -54,7 +54,7 @@
 //    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorNamed:@"NavColor"]];
     
     self.view.backgroundColor = [UIColor colorNamed:@"BgColor"];
-    _currentShopCode = @"0000";
+    _currentShopCode = @"1006";
     
     shopArr = @[@"0000 永旺（北京)", @"1001 国际商城店", @"1002 朝北大悦城店", @"1003 天津泰达店",@"1004 天津中北店", @"1005 天津梅江店", @"1006 丰台店",@"1007 河北燕郊店", @"1008 天津天河城店", @"1009 天津津南店",@"1995 国际商城店(外仓2)", @"1996 北京永旺低温物流中心", @"1997 国际商城店(外仓)",@"1998 虚拟店铺", @"1999 北京永旺物流中心"];
     
@@ -122,7 +122,7 @@
     UIButton *titleBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kMainScreenWidth, 64)];
     [titleBtn setImage:[UIImage imageNamed:@"buddy_header_arrow"] forState:UIControlStateNormal];
     [titleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [titleBtn setTitle:@"0000 永旺（北京)" forState:UIControlStateNormal];
+    [titleBtn setTitle:@"1006 丰台店" forState:UIControlStateNormal];
     titleBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     titleBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
     titleBtn.imageView.contentMode = UIViewContentModeCenter;
@@ -393,9 +393,12 @@
 #pragma mark-
 
 - (void)changeDateValues:(NSString *)dateStr{
+    
     _selectedDateStr = dateStr;
 }
 - (void)calculateTotal{
+    
+    self.total = @"...";
     [self postSales2];
 }
 

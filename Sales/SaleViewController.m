@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *tf_date;
 @property (weak, nonatomic) IBOutlet UILabel *lbl_total;
+@property (weak, nonatomic) IBOutlet UIButton *btn;
 
 @property(nonatomic,weak) UIDatePicker *myDatePicker;
 
@@ -22,7 +23,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tf_date.text = [self getCurrentTime:[NSDate date]];
+    NSDate *yesterday = [NSDate dateWithTimeInterval:-24*60*60 sinceDate:[NSDate date]];
+    
+    self.tf_date.text = [self getCurrentTime:yesterday];
     self.tf_date.textColor = [UIColor colorNamed:@"NavColor"];
     
     UIDatePicker *picker = [[UIDatePicker alloc]init];
@@ -33,7 +36,7 @@
     self.tf_date.inputView = picker;
     self.myDatePicker = picker;
     
-    [self setCurrentDate:[NSDate date]];
+    [self setCurrentDate:yesterday];
 }
 
 - (void)DatePickerValueChanged:(UIDatePicker *)sender{
@@ -60,10 +63,18 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
     
-        self.lbl_total.text = [NSString stringWithFormat:@"总金额：%@", total];
+        self.lbl_total.text = [NSString stringWithFormat:@"总金额：%@元", total];
+        
+        if (![total isEqualToString:@"..."]) {
+            self.btn.userInteractionEnabled = YES;
+            [self.btn setTitle:@"计算该日销售总金额" forState:UIControlStateNormal];
+        }
     });
 }
 - (IBAction)clickBtnTotal:(id)sender {
+    
+    self.btn.userInteractionEnabled = NO;
+    [self.btn setTitle:@"计算中..." forState:UIControlStateNormal];
     
     if ([self.delegate respondsToSelector:@selector(calculateTotal)]) {
         [self.delegate calculateTotal];

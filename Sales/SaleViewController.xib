@@ -13,6 +13,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SaleViewController">
             <connections>
+                <outlet property="btn" destination="TWJ-gH-i9H" id="7If-SY-LBa"/>
                 <outlet property="lbl_total" destination="1kA-EL-Xfd" id="pKa-hz-0ge"/>
                 <outlet property="tf_date" destination="gRH-Tj-YAb" id="ahi-ce-ah9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
