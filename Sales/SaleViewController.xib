@@ -37,7 +37,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWJ-gH-i9H">
-                    <rect key="frame" x="20" y="120" width="335" height="50"/>
+                    <rect key="frame" x="30" y="120" width="315" height="50"/>
                     <color key="backgroundColor" name="NavColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="ku1-Sj-bf4"/>
@@ -53,8 +53,8 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="1kA-EL-Xfd" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="H5H-zx-tpL"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="TWJ-gH-i9H" secondAttribute="trailing" constant="20" id="M8n-HL-96b"/>
-                <constraint firstItem="TWJ-gH-i9H" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="Z3h-E7-7i2"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="TWJ-gH-i9H" secondAttribute="trailing" constant="30" id="M8n-HL-96b"/>
+                <constraint firstItem="TWJ-gH-i9H" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="30" id="Z3h-E7-7i2"/>
                 <constraint firstItem="1kA-EL-Xfd" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="aeu-Rj-jJW"/>
                 <constraint firstItem="gRH-Tj-YAb" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="30" id="hTn-VC-Bzv"/>
                 <constraint firstItem="gRH-Tj-YAb" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="i6W-Ur-uZz"/>

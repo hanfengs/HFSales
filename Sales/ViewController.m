@@ -10,6 +10,7 @@
 #import "PPNetworkHelper.h"
 #import "DLTabedSlideView.h"
 #import "SaleViewController.h"
+#import "MonthSaleViewController.h"
 #import "Ono.h"
 
 #define TxtUser @"1000000006"
@@ -98,7 +99,7 @@
             return ctrl;
         }
         case 1:{
-            SaleViewController *ctrl = [[SaleViewController alloc] init];
+            MonthSaleViewController *ctrl = [[MonthSaleViewController alloc] init];
 //                        ctrl.view.backgroundColor = [UIColor greenColor];
             return ctrl;
         }

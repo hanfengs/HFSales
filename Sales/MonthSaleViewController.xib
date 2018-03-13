@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MonthSaleViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kwy-qY-Xj1">
+                    <rect key="frame" x="30" y="120" width="315" height="50"/>
+                    <color key="backgroundColor" name="NavColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="X0d-Ac-7vP"/>
+                    </constraints>
+                    <state key="normal" title="计算该月销售总金额">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                </button>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CNI-rt-g9B">
+                    <rect key="frame" x="173.5" y="50" width="28" height="40"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" weight="black" pointSize="30"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="CNI-rt-g9B" firstAttribute="centerX" secondItem="kwy-qY-Xj1" secondAttribute="centerX" id="55t-Da-IE2"/>
+                <constraint firstItem="CNI-rt-g9B" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="30" id="8mf-e4-VXA"/>
+                <constraint firstItem="CNI-rt-g9B" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="KiU-QS-oA1"/>
+                <constraint firstItem="kwy-qY-Xj1" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="30" id="Utc-p4-PEA"/>
+                <constraint firstItem="kwy-qY-Xj1" firstAttribute="top" secondItem="CNI-rt-g9B" secondAttribute="bottom" constant="30" id="bHx-gj-JCy"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="kwy-qY-Xj1" secondAttribute="trailing" constant="30" id="sPL-zR-GCt"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="NavColor">
+            <color red="0.18823529410000001" green="0.2274509804" blue="0.64705882349999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
