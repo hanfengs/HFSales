@@ -24,12 +24,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gRH-Tj-YAb">
-                    <rect key="frame" x="173.5" y="50" width="28" height="40"/>
-                    <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" weight="black" pointSize="30"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1kA-EL-Xfd">
                     <rect key="frame" x="188" y="333.5" width="0.0" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
@@ -37,7 +31,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWJ-gH-i9H">
-                    <rect key="frame" x="30" y="120" width="315" height="50"/>
+                    <rect key="frame" x="30" y="116" width="315" height="50"/>
                     <color key="backgroundColor" name="NavColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="ku1-Sj-bf4"/>
@@ -49,6 +43,11 @@
                         <action selector="clickBtnTotal:" destination="-1" eventType="touchUpInside" id="DwG-NQ-2D0"/>
                     </connections>
                 </button>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gRH-Tj-YAb">
+                    <rect key="frame" x="181.5" y="50" width="11" height="36"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>

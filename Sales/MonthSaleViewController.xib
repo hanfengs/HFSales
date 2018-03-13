@@ -13,6 +13,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MonthSaleViewController">
             <connections>
+                <outlet property="btn" destination="kwy-qY-Xj1" id="hbH-tw-60v"/>
+                <outlet property="lbl_month" destination="koI-sL-0jj" id="DtE-vH-9jL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -30,27 +32,36 @@
                     <state key="normal" title="计算该月销售总金额">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
+                    <connections>
+                        <action selector="clickBtn:" destination="-1" eventType="touchUpInside" id="Zde-d3-949"/>
+                    </connections>
                 </button>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CNI-rt-g9B">
-                    <rect key="frame" x="173.5" y="50" width="28" height="40"/>
-                    <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" weight="black" pointSize="30"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="koI-sL-0jj">
+                    <rect key="frame" x="176.5" y="50" width="24" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="AxE-2x-RFK"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <color key="textColor" name="NavColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="CNI-rt-g9B" firstAttribute="centerX" secondItem="kwy-qY-Xj1" secondAttribute="centerX" id="55t-Da-IE2"/>
-                <constraint firstItem="CNI-rt-g9B" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="30" id="8mf-e4-VXA"/>
-                <constraint firstItem="CNI-rt-g9B" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="KiU-QS-oA1"/>
+                <constraint firstItem="kwy-qY-Xj1" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="H59-ru-dPU"/>
+                <constraint firstItem="koI-sL-0jj" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Qky-N7-ur5"/>
+                <constraint firstItem="koI-sL-0jj" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="30" id="Qpf-Et-Udu"/>
                 <constraint firstItem="kwy-qY-Xj1" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="30" id="Utc-p4-PEA"/>
-                <constraint firstItem="kwy-qY-Xj1" firstAttribute="top" secondItem="CNI-rt-g9B" secondAttribute="bottom" constant="30" id="bHx-gj-JCy"/>
+                <constraint firstItem="kwy-qY-Xj1" firstAttribute="top" secondItem="koI-sL-0jj" secondAttribute="bottom" constant="30" id="ePO-PX-jlT"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="kwy-qY-Xj1" secondAttribute="trailing" constant="30" id="sPL-zR-GCt"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
         </view>
     </objects>
     <resources>
+        <namedColor name="NavColor">
+            <color red="0.18823529411764706" green="0.22745098039215686" blue="0.6470588235294118" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="NavColor">
             <color red="0.18823529410000001" green="0.2274509804" blue="0.64705882349999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

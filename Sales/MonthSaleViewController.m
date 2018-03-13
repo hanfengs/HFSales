@@ -7,8 +7,19 @@
 //
 
 #import "MonthSaleViewController.h"
+#import "QFDatePickerView.h"
 
-@interface MonthSaleViewController ()
+#define kMainScreenWidth [UIScreen mainScreen].bounds.size.width
+#define KMainScreenHeight [UIScreen mainScreen].bounds.size.height
+
+@interface MonthSaleViewController ()<UITableViewDelegate, UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UITextField *tf_month;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_month;
+@property (weak, nonatomic) IBOutlet UIButton *btn;
+
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSArray *arr;
 
 @end
 
@@ -17,6 +28,67 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.lbl_month.text = [self getCurrentTime:[NSDate date]];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleMonthPicker:)];
+    self.lbl_month.userInteractionEnabled = YES;
+    [self.lbl_month addGestureRecognizer:tap];
+    
+    self.arr = @[@"0000", @"1001", @"1002", @"1003",@"1004", @"1005", @"1006",@"1007 ", @"1008", @"1009",@"1995", @"1996", @"1997",@"1998", @"1999"];
+    
+    [self.view addSubview:self.tableView];
+}
+
+#pragma mark-
+
+- (UITableView *)tableView{
+    if (_tableView == nil) {
+        
+        CGFloat y = CGRectGetMaxY(self.btn.frame);
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, y, kMainScreenWidth, KMainScreenHeight - y - 64 - 40) style:UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    }
+    return _tableView;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.arr.count;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"tableView"];
+    cell.backgroundColor = [UIColor whiteColor];
+    cell.textLabel.text = self.arr[indexPath.row];
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    
+    return cell;
+}
+
+#pragma mark-
+-(void)handleMonthPicker:(UITapGestureRecognizer *)sender{
+    
+    QFDatePickerView *datePickerView = [[QFDatePickerView alloc]initDatePackerWithResponse:^(NSString *str) {
+
+        if (![str isEqualToString:@"至今"]) {
+            self.lbl_month.text = str;
+        }
+    }];
+    [datePickerView show];
+}
+
+- (NSString *)getCurrentTime:(NSDate *)date{
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.locale = [NSLocale localeWithLocaleIdentifier:@"en"];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateTime = [formatter stringFromDate:date];
+    
+    return [dateTime substringToIndex:7];
+}
+
+- (IBAction)clickBtn:(id)sender {
 }
 
 @end

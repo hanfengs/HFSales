@@ -10,6 +10,7 @@
 		6A54909B20564BB3004BEB90 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A54909A20564BB3004BEB90 /* libxml2.tbd */; };
 		6A6A95E72057CBBE0091E416 /* MonthSaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A95E52057CBBE0091E416 /* MonthSaleViewController.m */; };
 		6A6A95E82057CBBE0091E416 /* MonthSaleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A6A95E62057CBBE0091E416 /* MonthSaleViewController.xib */; };
+		6A6A95EC2057CDE60091E416 /* QFDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A95EA2057CDE60091E416 /* QFDatePickerView.m */; };
 		6A7B152D204FF92200EFC9B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7B152C204FF92200EFC9B8 /* AppDelegate.m */; };
 		6A7B1530204FF92200EFC9B8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7B152F204FF92200EFC9B8 /* ViewController.m */; };
 		6A7B1533204FF92200EFC9B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A7B1531204FF92200EFC9B8 /* Main.storyboard */; };
@@ -37,6 +38,8 @@
 		6A6A95E42057CBBE0091E416 /* MonthSaleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonthSaleViewController.h; sourceTree = "<group>"; };
 		6A6A95E52057CBBE0091E416 /* MonthSaleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonthSaleViewController.m; sourceTree = "<group>"; };
 		6A6A95E62057CBBE0091E416 /* MonthSaleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MonthSaleViewController.xib; sourceTree = "<group>"; };
+		6A6A95EA2057CDE60091E416 /* QFDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QFDatePickerView.m; sourceTree = "<group>"; };
+		6A6A95EB2057CDE60091E416 /* QFDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QFDatePickerView.h; sourceTree = "<group>"; };
 		6A7B1528204FF92200EFC9B8 /* Sales.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sales.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A7B152B204FF92200EFC9B8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6A7B152C204FF92200EFC9B8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -92,6 +95,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		6A6A95E92057CDE60091E416 /* QFDatePickerView */ = {
+			isa = PBXGroup;
+			children = (
+				6A6A95EB2057CDE60091E416 /* QFDatePickerView.h */,
+				6A6A95EA2057CDE60091E416 /* QFDatePickerView.m */,
+			);
+			path = QFDatePickerView;
+			sourceTree = "<group>";
+		};
 		6A7B151F204FF92100EFC9B8 = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +148,7 @@
 		6A7B15452052909000EFC9B8 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
+				6A6A95E92057CDE60091E416 /* QFDatePickerView */,
 				6A7B1546205290B900EFC9B8 /* DLSlideView */,
 			);
 			path = Vender;
@@ -329,6 +342,7 @@
 				6A7B152D204FF92200EFC9B8 /* AppDelegate.m in Sources */,
 				6A7B155B205290B900EFC9B8 /* DLScrollTabbarView.m in Sources */,
 				6A7B155C205290B900EFC9B8 /* DLFixedTabbarView.m in Sources */,
+				6A6A95EC2057CDE60091E416 /* QFDatePickerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
