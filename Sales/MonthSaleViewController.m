@@ -8,6 +8,7 @@
 
 #import "MonthSaleViewController.h"
 #import "QFDatePickerView.h"
+#import "MonthSaleTableCell.h"
 
 #define kMainScreenWidth [UIScreen mainScreen].bounds.size.width
 #define KMainScreenHeight [UIScreen mainScreen].bounds.size.height
@@ -34,7 +35,12 @@
     self.lbl_month.userInteractionEnabled = YES;
     [self.lbl_month addGestureRecognizer:tap];
     
-    self.arr = @[@"0000", @"1001", @"1002", @"1003",@"1004", @"1005", @"1006",@"1007 ", @"1008", @"1009",@"1995", @"1996", @"1997",@"1998", @"1999"];
+    MonthSaleModel *model = [[MonthSaleModel alloc] init];
+    model.day = @"2018-03-12";
+    model.total = @"10000元";
+    
+    self.arr = @[model];
+  //@[@"0000", @"1001", @"1002", @"1003",@"1004", @"1005", @"1006",@"1007 ", @"1008", @"1009",@"1995", @"1996", @"1997",@"1998", @"1999"];
     
     [self.view addSubview:self.tableView];
 }
@@ -49,6 +55,9 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        
+        _tableView.rowHeight = 30;
+        
     }
     return _tableView;
 }
@@ -58,11 +67,8 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"tableView"];
-    cell.backgroundColor = [UIColor whiteColor];
-    cell.textLabel.text = self.arr[indexPath.row];
-    cell.textLabel.textAlignment = NSTextAlignmentCenter;
-    
+    MonthSaleTableCell *cell = [MonthSaleTableCell createCellWithTableView:tableView];
+    cell.model = self.arr[indexPath.row];
     return cell;
 }
 
@@ -89,6 +95,9 @@
 }
 
 - (IBAction)clickBtn:(id)sender {
+    
 }
 
 @end
+
+

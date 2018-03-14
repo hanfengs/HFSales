@@ -27,6 +27,8 @@
 		6A7B155F205290B900EFC9B8 /* DLSlideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7B1558205290B900EFC9B8 /* DLSlideView.m */; };
 		6A7B1563205291BC00EFC9B8 /* SaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7B1561205291BC00EFC9B8 /* SaleViewController.m */; };
 		6A7B1564205291BC00EFC9B8 /* SaleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A7B1562205291BC00EFC9B8 /* SaleViewController.xib */; };
+		6ADD81472058BF4D00C5ACB0 /* MonthSaleTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ADD81452058BF4D00C5ACB0 /* MonthSaleTableCell.m */; };
+		6ADD81482058BF4D00C5ACB0 /* MonthSaleTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ADD81462058BF4D00C5ACB0 /* MonthSaleTableCell.xib */; };
 		E8B5ACD27C4F0723D346A9D6 /* libPods-Sales.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22360110F247C8FDEBC1A135 /* libPods-Sales.a */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +72,9 @@
 		6A7B1560205291BC00EFC9B8 /* SaleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaleViewController.h; sourceTree = "<group>"; };
 		6A7B1561205291BC00EFC9B8 /* SaleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaleViewController.m; sourceTree = "<group>"; };
 		6A7B1562205291BC00EFC9B8 /* SaleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaleViewController.xib; sourceTree = "<group>"; };
+		6ADD81442058BF4D00C5ACB0 /* MonthSaleTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonthSaleTableCell.h; sourceTree = "<group>"; };
+		6ADD81452058BF4D00C5ACB0 /* MonthSaleTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonthSaleTableCell.m; sourceTree = "<group>"; };
+		6ADD81462058BF4D00C5ACB0 /* MonthSaleTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MonthSaleTableCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +142,9 @@
 				6A6A95E42057CBBE0091E416 /* MonthSaleViewController.h */,
 				6A6A95E52057CBBE0091E416 /* MonthSaleViewController.m */,
 				6A6A95E62057CBBE0091E416 /* MonthSaleViewController.xib */,
+				6ADD81442058BF4D00C5ACB0 /* MonthSaleTableCell.h */,
+				6ADD81452058BF4D00C5ACB0 /* MonthSaleTableCell.m */,
+				6ADD81462058BF4D00C5ACB0 /* MonthSaleTableCell.xib */,
 				6A7B1534204FF92200EFC9B8 /* Assets.xcassets */,
 				6A7B1536204FF92200EFC9B8 /* LaunchScreen.storyboard */,
 				6A7B1539204FF92200EFC9B8 /* Info.plist */,
@@ -268,6 +276,7 @@
 				6A7B1538204FF92200EFC9B8 /* LaunchScreen.storyboard in Resources */,
 				6A7B1535204FF92200EFC9B8 /* Assets.xcassets in Resources */,
 				6A7B1533204FF92200EFC9B8 /* Main.storyboard in Resources */,
+				6ADD81482058BF4D00C5ACB0 /* MonthSaleTableCell.xib in Resources */,
 				6A7B1564205291BC00EFC9B8 /* SaleViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -334,6 +343,7 @@
 				6A7B155A205290B900EFC9B8 /* DLTabedSlideView.m in Sources */,
 				6A6A95E72057CBBE0091E416 /* MonthSaleViewController.m in Sources */,
 				6A7B155F205290B900EFC9B8 /* DLSlideView.m in Sources */,
+				6ADD81472058BF4D00C5ACB0 /* MonthSaleTableCell.m in Sources */,
 				6A7B155D205290B900EFC9B8 /* DLUtility.m in Sources */,
 				6A7B153B204FF92200EFC9B8 /* main.m in Sources */,
 				6A7B155E205290B900EFC9B8 /* DLCustomSlideView.m in Sources */,
