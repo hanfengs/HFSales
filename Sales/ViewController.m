@@ -11,6 +11,7 @@
 #import "DLTabedSlideView.h"
 #import "SaleViewController.h"
 #import "MonthSaleViewController.h"
+#import "MonthSaleTableCell.h"
 #import "Ono.h"
 
 #define TxtUser @"1000000006"
@@ -27,9 +28,9 @@
 @property (nonatomic, copy) NSString *GUID;
 @property (nonatomic, copy) NSString *VIEWSTATE3;
 @property (nonatomic, copy) NSString *PREVIOUSPAGE3;
-@property (nonatomic, strong) NSDictionary *param;
-@property (nonatomic, strong) NSArray *costArr;
-@property (nonatomic, assign) NSString *total;
+
+@property (nonatomic, assign) NSString *total;//一日销售额
+@property (nonatomic, strong) NSMutableArray *monthTotalArrM;//月销售额数组
 
 @property (nonatomic, strong) UIButton *titleButton;
 
@@ -38,13 +39,17 @@
 
 @property (strong, nonatomic) DLTabedSlideView *tabedSlideView;
 @property (nonatomic, strong) SaleViewController *dayVC;
+@property (nonatomic, strong) MonthSaleViewController *monthVC;
 
 @end
 
 @implementation ViewController{
     NSArray *shopArr;
+    NSDictionary *_param;
     NSString *_selectedDateStr;
     NSString *_currentShopCode;
+    dispatch_semaphore_t _semaphore;
+    dispatch_group_t _dispatchGroup;
 }
 
 - (void)viewDidLoad {
@@ -60,7 +65,6 @@
     shopArr = @[@"0000 永旺（北京)", @"1001 国际商城店", @"1002 朝北大悦城店", @"1003 天津泰达店",@"1004 天津中北店", @"1005 天津梅江店", @"1006 丰台店",@"1007 河北燕郊店", @"1008 天津天河城店", @"1009 天津津南店",@"1995 国际商城店(外仓2)", @"1996 北京永旺低温物流中心", @"1997 国际商城店(外仓)",@"1998 虚拟店铺", @"1999 北京永旺物流中心"];
     
     [self loadSignIn];
-//    [self postSignIn];
     
     [self setupNavTitle];
     [self setupSubVC];
@@ -70,8 +74,8 @@
 - (void)setupSubVC{
     self.tabedSlideView.baseViewController = self;
     self.tabedSlideView.tabItemNormalColor = [UIColor blackColor];
-    self.tabedSlideView.tabItemSelectedColor = [UIColor redColor];//[UIColor colorWithRed:0.833 green:0.052 blue:0.130 alpha:1.000];
-    self.tabedSlideView.tabbarTrackColor = [UIColor redColor];//[UIColor colorWithRed:0.833 green:0.052 blue:0.130 alpha:1.000];
+    self.tabedSlideView.tabItemSelectedColor = [UIColor colorNamed:@"totalColor"];//[UIColor colorWithRed:0.833 green:0.052 blue:0.130 alpha:1.000];
+    self.tabedSlideView.tabbarTrackColor = [UIColor colorNamed:@"totalColor"];//[UIColor colorWithRed:0.833 green:0.052 blue:0.130 alpha:1.000];
     //    self.tabedSlideView.tabbarBackgroundImage = [UIImage imageNamed:@"mask_navbar"];
     self.tabedSlideView.tabbarBottomSpacing = 0;
     
@@ -94,13 +98,25 @@
             SaleViewController *ctrl = [[SaleViewController alloc] init];
             ctrl.delegate = self;
             self.dayVC = ctrl;
-            
-//                        ctrl.view.backgroundColor = [UIColor redColor];
             return ctrl;
         }
         case 1:{
             MonthSaleViewController *ctrl = [[MonthSaleViewController alloc] init];
-//                        ctrl.view.backgroundColor = [UIColor greenColor];
+            self.monthVC = ctrl;
+            
+            ctrl.block_calculate = ^(NSString *monthStr) {
+                //传递按钮点击事件，主线程；所以开子线程
+                dispatch_async(dispatch_queue_create(0, 0), ^{
+                    self.monthTotalArrM = nil;
+                    NSArray *arr = [self dateArrWithMonth:monthStr];
+                    _semaphore = dispatch_semaphore_create(0);
+                    for (NSInteger i = 0; i < arr.count; i++) {
+                        NSString *obj = arr[i];
+                        [self postSales2:obj With:YES];
+                        NSLog(@"noRequest-%ld",(long)i);
+                    }
+                });
+            };
             return ctrl;
         }
         default:
@@ -248,7 +264,6 @@
                 self.GUID = string;
             }
         }
-        
     }] resume];
 }
 
@@ -265,7 +280,7 @@
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
         NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        self.param = [self paramFormSales1:string];
+        _param = [self paramFormSales1:string];
         
     }] resume];
 }
@@ -314,19 +329,14 @@
     return dictM.copy;
 }
 
-- (void)setParam:(NSDictionary *)param{
-    _param = param;
+//_param拿到所有参数，可以获取销售数据了sales2
+- (void)postSales2:(NSString *)dateStr With:(BOOL)isMonth{
     
-//    [self postSales2];//拿到所有参数，可以获取销售数据了
-}
-
-- (void)postSales2{
-    
-    NSString *urlStr = [NSString stringWithFormat:@"http://www.aeonweb.cn/AeonABJ/Pages/Sales2.aspx?GUID=%@", self.param[@"GUID"]];
+    NSString *urlStr = [NSString stringWithFormat:@"http://www.aeonweb.cn/AeonABJ/Pages/Sales2.aspx?GUID=%@", _param[@"GUID"]];
     NSURL *url = [NSURL URLWithString:urlStr];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
-    NSString *paraStr = [NSString stringWithFormat:@"__EVENTTARGET=""&__EVENTARGUMENT=""&__VIEWSTATE=%@&__PREVIOUSPAGE=%@&ShopList1$ddlShopList=%@&Txt_OrderDate1=%@&Txt_OrderDate2=%@&Txt_ITCO1=""&Txt_ITCO2=""&btnSearch=查询(SEARCH)", self.param[@"__VIEWSTATE"], self.param[@"__PREVIOUSPAGE"], _currentShopCode, _selectedDateStr, _selectedDateStr];
+    NSString *paraStr = [NSString stringWithFormat:@"__EVENTTARGET=""&__EVENTARGUMENT=""&__VIEWSTATE=%@&__PREVIOUSPAGE=%@&ShopList1$ddlShopList=%@&Txt_OrderDate1=%@&Txt_OrderDate2=%@&Txt_ITCO1=""&Txt_ITCO2=""&btnSearch=查询(SEARCH)", _param[@"__VIEWSTATE"], _param[@"__PREVIOUSPAGE"], _currentShopCode, dateStr, dateStr];
     
     NSString *para1 = [paraStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     //[para4 stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
@@ -343,13 +353,39 @@
         
 //        NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         
-        [self html:data];
+        if (isMonth) {//月销售额
+            MonthSaleModel *model = [[MonthSaleModel alloc] init];
+            model.day = dateStr;
+            model.total = [self html:data];
+           
+            NSMutableArray *arrM = [NSMutableArray arrayWithArray:self.monthTotalArrM];
+            [arrM addObject:model];
+            self.monthTotalArrM = arrM;
+            dispatch_semaphore_signal(_semaphore);
+            NSLog(@"===X==%@", [NSThread currentThread]);
+            
+//            dispatch_async(dispatch_queue_create(0, 0), ^{
+//            });
+            
+        }else{//日销售额
+            self.total = [self html:data];
+        }
         
     }] resume];
+    
+    if (isMonth) {
+        dispatch_semaphore_wait(_semaphore, DISPATCH_TIME_FOREVER);
+    }
 }
 
+- (void)setMonthTotalArrM:(NSMutableArray *)monthTotalArrM{
+    _monthTotalArrM = monthTotalArrM;
+    
+    self.monthVC.monthArr = monthTotalArrM;
+}
 #pragma mark- html解析
-- (void)html:(NSData *)data{
+//日销售额
+- (NSString *)html:(NSData *)data{
 
     NSError *error;
     ONOXMLDocument *document = [ONOXMLDocument HTMLDocumentWithData:data error:&error];
@@ -370,20 +406,14 @@
         }
     }];
     
-    self.costArr = arrM.copy;
-}
-
-- (void)setCostArr:(NSArray *)costArr{
-    _costArr = costArr;
-    
     NSDecimalNumber *sum = [[NSDecimalNumber alloc] initWithString:@"0"];
-    for (NSInteger i = 0; i < costArr.count; i++) {
+    for (NSInteger i = 0; i < arrM.count; i++) {
         
-        NSString *costStr = costArr[i];
+        NSString *costStr = arrM[i];
         NSDecimalNumber *dn = [NSDecimalNumber decimalNumberWithString:costStr];
         sum = [sum decimalNumberByAdding:dn];
     }
-    self.total = [NSString stringWithFormat:@"%@", sum];
+    return [NSString stringWithFormat:@"%@元", sum];
 }
 
 - (void)setTotal:(NSString *)total{
@@ -391,7 +421,7 @@
     self.dayVC.total = total;
 }
 
-#pragma mark-
+#pragma mark- 代理方法
 
 - (void)changeDateValues:(NSString *)dateStr{
     
@@ -400,48 +430,93 @@
 - (void)calculateTotal{
     
     self.total = @"...";
-    [self postSales2];
+    [self postSales2:_selectedDateStr With:NO];
 }
 
-#pragma mark- 测试
-//框架会自动反序列化，而这里无法不是接口，从网页XML中提取
-- (void)postSignIn2{
+#pragma mark-
+
+
+// yearMonth为空是本月，不为空是之前的月
+- (NSArray *)dateArrWithMonth:(NSString *)yearMonth{
     
-    NSString *url = @"http://www.aeonweb.cn/AeonABJ/SignIn.aspx";
-    
-    NSString *x = [NSString stringWithFormat:@"%u", arc4random_uniform(random)];
-    NSString *y = [NSString stringWithFormat:@"%u", arc4random_uniform(random)];
-    
-//    NSString *para = [NSString stringWithFormat:@"__VIEWSTATE=%@&TxtUser=%@&TxtPassword=%@&btnLogin.x=%@&btnLogin.y=%@", self.VIEWSTATE, TxtUser, TxtPassword, x, y];
-    
-    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
-                           self.VIEWSTATE, @"__VIEWSTATE",
-                           TxtUser, @"TxtUser",
-                           TxtPassword, @"TxtPassword",
-                           x, @"btnLogin.x",
-                           y, @"btnLogin.y",
-                           nil];
-    
-    [PPNetworkHelper POST:url parameters:param success:^(id responseObject) {
+    NSUInteger count = 0;
+    NSMutableArray *arrM = [NSMutableArray array];
+    if (yearMonth) {
+        NSString *year = [yearMonth substringToIndex:4];
+        NSString *month = [yearMonth substringFromIndex:yearMonth.length - 2];
+        count = [self NSStringIntTeger:month.integerValue andYear:year.integerValue];
+        for (NSInteger i = 1; i <= count; i++) {
+            NSString *str = [NSString stringWithFormat:@"%@/%@/%02ld", year, month, (long)i];
+            [arrM addObject:str];
+        }
+    }else{
+        NSString *current = [self getCurrentTime];
         
-        //        NSRange range = [string rangeOfString:@"value=\"/"];
-        //        if (range.location != NSNotFound) {
-        //            NSString *__VIEWSTATE = [string substringWithRange:range];
-        //            NSLog(@"%@", __VIEWSTATE);
-        //        }
-        
-        NSString *string = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"%@",string);
-        
-    } failure:^(NSError *error) {
-        
-    }];
+        NSString *year = [current substringToIndex:4];
+        NSString *month = [current substringWithRange:NSMakeRange(5, 2)];
+        NSString *day =  [current substringFromIndex:current.length - 2];
+        count = day.integerValue - 1;
+        for (NSInteger i = 1; i <= count; i++) {
+            NSString *str = [NSString stringWithFormat:@"%@/%@/%02ld", year, month, (long)i];
+            [arrM addObject:str];
+        }
+    }
+    return arrM.copy;
+}
+- (NSInteger)NSStringIntTeger:(NSInteger)teger andYear:(NSInteger)year{
+    
+    NSInteger dayCount;
+    switch (teger) {
+        case 1:
+            dayCount = 31;
+            break;
+        case 2:
+            if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)) {
+                dayCount = 29;
+            }else{
+                dayCount = 28;
+            }
+            break;
+        case 3:
+            dayCount = 31;
+            break;
+        case 4:
+            dayCount = 30;
+            break;
+        case 5:
+            dayCount = 31;
+            break;
+        case 6:
+            dayCount = 30;
+            break;
+        case 7:
+            dayCount = 31;
+            break;
+        case 8:
+            dayCount = 31;
+            break;
+        case 9:
+            dayCount = 30;
+            break;
+        case 10:
+            dayCount = 31;
+            break;
+        case 11:
+            dayCount = 30;
+            break;
+        default:
+            dayCount = 31;
+            break;
+    }
+    return dayCount;
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (NSString *)getCurrentTime{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.locale = [NSLocale localeWithLocaleIdentifier:@"en"];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateTime = [formatter stringFromDate:[NSDate date]];
+    return dateTime;
 }
 
 @end

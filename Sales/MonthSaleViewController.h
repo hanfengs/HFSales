@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^calculateMonthTotal)(NSString *);
+
 @interface MonthSaleViewController : UIViewController
+
+@property (nonatomic, strong) NSArray *monthArr;
+
+@property (nonatomic, copy) calculateMonthTotal block_calculate;
 
 @end

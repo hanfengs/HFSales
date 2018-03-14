@@ -63,7 +63,7 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
     
-        self.lbl_total.text = [NSString stringWithFormat:@"总金额：%@元", total];
+        self.lbl_total.text = [NSString stringWithFormat:@"总金额：%@", total];
         
         if (![total isEqualToString:@"..."]) {
             self.btn.userInteractionEnabled = YES;

@@ -20,7 +20,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *btn;
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSArray *arr;
 
 @end
 
@@ -39,10 +38,19 @@
     model.day = @"2018-03-12";
     model.total = @"10000元";
     
-    self.arr = @[model];
+//    self.arr = nil;//@[model];
   //@[@"0000", @"1001", @"1002", @"1003",@"1004", @"1005", @"1006",@"1007 ", @"1008", @"1009",@"1995", @"1996", @"1997",@"1998", @"1999"];
     
     [self.view addSubview:self.tableView];
+}
+
+- (void)setMonthArr:(NSArray *)monthArr{
+    _monthArr = monthArr;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self.tableView reloadData];
+    });
 }
 
 #pragma mark-
@@ -63,12 +71,12 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.arr.count;
+    return self.monthArr.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     MonthSaleTableCell *cell = [MonthSaleTableCell createCellWithTableView:tableView];
-    cell.model = self.arr[indexPath.row];
+    cell.model = self.monthArr[indexPath.row];
     return cell;
 }
 
@@ -90,12 +98,24 @@
     formatter.locale = [NSLocale localeWithLocaleIdentifier:@"en"];
     [formatter setDateFormat:@"yyyy-MM-dd"];
     NSString *dateTime = [formatter stringFromDate:date];
-    
     return [dateTime substringToIndex:7];
 }
 
 - (IBAction)clickBtn:(id)sender {
     
+    self.monthArr = nil;
+//    self.btn.userInteractionEnabled = NO;
+    [self.btn setTitle:@"计算中..." forState:UIControlStateNormal];
+    
+    if (self.block_calculate) {
+        
+        NSString *thisMonth = [self getCurrentTime:[NSDate date]];
+        if ([self.lbl_month.text isEqualToString:thisMonth]) {//本月
+            self.block_calculate(nil);
+        }else{//之前的月
+            self.block_calculate(self.lbl_month.text);
+        }
+    }
 }
 
 @end

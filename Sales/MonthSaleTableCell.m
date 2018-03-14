@@ -39,6 +39,7 @@
     self.lbl_day.text = model.day;
     self.lbl_total.text = model.total;
 }
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
