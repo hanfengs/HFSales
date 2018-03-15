@@ -49,7 +49,6 @@
     NSString *_selectedDateStr;
     NSString *_currentShopCode;
     dispatch_semaphore_t _semaphore;
-    dispatch_group_t _dispatchGroup;
 }
 
 - (void)viewDidLoad {
@@ -105,6 +104,10 @@
             self.monthVC = ctrl;
             
             ctrl.block_calculate = ^(NSString *monthStr) {
+                
+                self.monthTotalArrM = nil;
+                self.monthVC.allTotal = NO;
+                
                 //传递按钮点击事件，主线程；所以开子线程
                 dispatch_async(dispatch_queue_create(0, 0), ^{
                     self.monthTotalArrM = nil;
@@ -114,6 +117,11 @@
                         NSString *obj = arr[i];
                         [self postSales2:obj With:YES];
                         NSLog(@"noRequest-%ld",(long)i);
+                        if (i == (arr.count - 1)) {
+                            //月销售累加的总金额
+                            [self allMonthTotal];
+                            
+                        }
                     }
                 });
             };
@@ -351,7 +359,7 @@
     
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
-//        NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         
         if (isMonth) {//月销售额
             MonthSaleModel *model = [[MonthSaleModel alloc] init];
@@ -364,9 +372,6 @@
             dispatch_semaphore_signal(_semaphore);
             NSLog(@"===X==%@", [NSThread currentThread]);
             
-//            dispatch_async(dispatch_queue_create(0, 0), ^{
-//            });
-            
         }else{//日销售额
             self.total = [self html:data];
         }
@@ -378,11 +383,37 @@
     }
 }
 
+#pragma mark- 计算金额
 - (void)setMonthTotalArrM:(NSMutableArray *)monthTotalArrM{
     _monthTotalArrM = monthTotalArrM;
     
     self.monthVC.monthArr = monthTotalArrM;
 }
+
+- (void)allMonthTotal{
+    
+    NSMutableArray *arrM = [NSMutableArray arrayWithArray:self.monthTotalArrM];
+    
+    MonthSaleModel *model = [[MonthSaleModel alloc] init];
+    model.day = @"总金额：";
+    model.total = [self monthAllTotal:self.monthTotalArrM];
+    
+    [arrM addObject:model];
+    
+    self.monthVC.allTotal = YES;
+    self.monthTotalArrM = arrM;
+}
+
+- (NSString *)monthAllTotal:(NSArray *)arr{
+    
+    NSDecimalNumber *sum = [[NSDecimalNumber alloc] initWithString:@"0"];
+    for (MonthSaleModel *obj in arr) {
+        NSDecimalNumber *dn = [NSDecimalNumber decimalNumberWithString:obj.total];
+        sum = [sum decimalNumberByAdding:dn];
+    }
+    return [NSString stringWithFormat:@"%@元", sum];
+}
+
 #pragma mark- html解析
 //日销售额
 - (NSString *)html:(NSData *)data{

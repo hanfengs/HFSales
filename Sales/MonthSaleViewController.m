@@ -50,6 +50,11 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         
         [self.tableView reloadData];
+        
+        if (self.allTotal) {
+            self.btn.userInteractionEnabled = YES;
+            [self.btn setTitle:@"计算该月销售总金额" forState:UIControlStateNormal];
+        }
     });
 }
 
@@ -104,7 +109,8 @@
 - (IBAction)clickBtn:(id)sender {
     
     self.monthArr = nil;
-//    self.btn.userInteractionEnabled = NO;
+    self.allTotal = NO;
+    self.btn.userInteractionEnabled = NO;
     [self.btn setTitle:@"计算中..." forState:UIControlStateNormal];
     
     if (self.block_calculate) {

@@ -13,6 +13,7 @@ typedef void(^calculateMonthTotal)(NSString *);
 @interface MonthSaleViewController : UIViewController
 
 @property (nonatomic, strong) NSArray *monthArr;
+@property (nonatomic, assign) BOOL allTotal;
 
 @property (nonatomic, copy) calculateMonthTotal block_calculate;
 
