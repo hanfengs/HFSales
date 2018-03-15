@@ -17,6 +17,7 @@
 @interface SaleViewController : UIViewController
 
 @property (nonatomic, copy) NSString *total;
+
 @property (nonatomic, weak) id<SaleViewControllerDelegate> delegate;
 
 @end

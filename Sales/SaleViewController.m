@@ -7,6 +7,7 @@
 //
 
 #import "SaleViewController.h"
+#import "DetailViewController.h"
 
 @interface SaleViewController ()
 
@@ -15,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btn;
 
 @property(nonatomic,weak) UIDatePicker *myDatePicker;
+@property (weak, nonatomic) IBOutlet UIButton *btn_detail;
 
 @end
 
@@ -69,6 +71,8 @@
             self.btn.userInteractionEnabled = YES;
             [self.btn setTitle:@"计算该日销售总金额" forState:UIControlStateNormal];
         }
+        
+        [self.btn_detail setTitle:@"详情" forState:UIControlStateNormal];
     });
 }
 - (IBAction)clickBtnTotal:(id)sender {
@@ -79,6 +83,11 @@
     if ([self.delegate respondsToSelector:@selector(calculateTotal)]) {
         [self.delegate calculateTotal];
     }
+}
+- (IBAction)clickBtnDetail:(id)sender {
+    
+    DetailViewController *vc = [[DetailViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (NSString *)getCurrentTime:(NSDate *)date{

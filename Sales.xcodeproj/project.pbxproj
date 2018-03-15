@@ -27,6 +27,8 @@
 		6A7B155F205290B900EFC9B8 /* DLSlideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7B1558205290B900EFC9B8 /* DLSlideView.m */; };
 		6A7B1563205291BC00EFC9B8 /* SaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7B1561205291BC00EFC9B8 /* SaleViewController.m */; };
 		6A7B1564205291BC00EFC9B8 /* SaleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A7B1562205291BC00EFC9B8 /* SaleViewController.xib */; };
+		6AAF3B77205A4C4900FCC36F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AAF3B76205A4C4900FCC36F /* DetailViewController.m */; };
+		6AAF3B79205A522E00FCC36F /* detail.html in Resources */ = {isa = PBXBuildFile; fileRef = 6AAF3B78205A522E00FCC36F /* detail.html */; };
 		6ADD81472058BF4D00C5ACB0 /* MonthSaleTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ADD81452058BF4D00C5ACB0 /* MonthSaleTableCell.m */; };
 		6ADD81482058BF4D00C5ACB0 /* MonthSaleTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ADD81462058BF4D00C5ACB0 /* MonthSaleTableCell.xib */; };
 		E8B5ACD27C4F0723D346A9D6 /* libPods-Sales.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22360110F247C8FDEBC1A135 /* libPods-Sales.a */; };
@@ -72,6 +74,9 @@
 		6A7B1560205291BC00EFC9B8 /* SaleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaleViewController.h; sourceTree = "<group>"; };
 		6A7B1561205291BC00EFC9B8 /* SaleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaleViewController.m; sourceTree = "<group>"; };
 		6A7B1562205291BC00EFC9B8 /* SaleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaleViewController.xib; sourceTree = "<group>"; };
+		6AAF3B75205A4C4900FCC36F /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		6AAF3B76205A4C4900FCC36F /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		6AAF3B78205A522E00FCC36F /* detail.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = detail.html; sourceTree = "<group>"; };
 		6ADD81442058BF4D00C5ACB0 /* MonthSaleTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonthSaleTableCell.h; sourceTree = "<group>"; };
 		6ADD81452058BF4D00C5ACB0 /* MonthSaleTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonthSaleTableCell.m; sourceTree = "<group>"; };
 		6ADD81462058BF4D00C5ACB0 /* MonthSaleTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MonthSaleTableCell.xib; sourceTree = "<group>"; };
@@ -145,6 +150,9 @@
 				6ADD81442058BF4D00C5ACB0 /* MonthSaleTableCell.h */,
 				6ADD81452058BF4D00C5ACB0 /* MonthSaleTableCell.m */,
 				6ADD81462058BF4D00C5ACB0 /* MonthSaleTableCell.xib */,
+				6AAF3B75205A4C4900FCC36F /* DetailViewController.h */,
+				6AAF3B76205A4C4900FCC36F /* DetailViewController.m */,
+				6AAF3B78205A522E00FCC36F /* detail.html */,
 				6A7B1534204FF92200EFC9B8 /* Assets.xcassets */,
 				6A7B1536204FF92200EFC9B8 /* LaunchScreen.storyboard */,
 				6A7B1539204FF92200EFC9B8 /* Info.plist */,
@@ -278,6 +286,7 @@
 				6A7B1533204FF92200EFC9B8 /* Main.storyboard in Resources */,
 				6ADD81482058BF4D00C5ACB0 /* MonthSaleTableCell.xib in Resources */,
 				6A7B1564205291BC00EFC9B8 /* SaleViewController.xib in Resources */,
+				6AAF3B79205A522E00FCC36F /* detail.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +353,7 @@
 				6A6A95E72057CBBE0091E416 /* MonthSaleViewController.m in Sources */,
 				6A7B155F205290B900EFC9B8 /* DLSlideView.m in Sources */,
 				6ADD81472058BF4D00C5ACB0 /* MonthSaleTableCell.m in Sources */,
+				6AAF3B77205A4C4900FCC36F /* DetailViewController.m in Sources */,
 				6A7B155D205290B900EFC9B8 /* DLUtility.m in Sources */,
 				6A7B153B204FF92200EFC9B8 /* main.m in Sources */,
 				6A7B155E205290B900EFC9B8 /* DLCustomSlideView.m in Sources */,

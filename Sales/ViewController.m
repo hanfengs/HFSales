@@ -360,6 +360,22 @@
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
         NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSRange range = [string rangeOfString:@"<title>"];//匹配得到的下标
+
+        NSMutableString* str =[[NSMutableString alloc]initWithString:string];
+        [str insertString:@"<meta charset=\"utf-8\">" atIndex:range.location];
+//
+//        ///<meta charset=\"utf-8\">
+        NSString *contentFileName=[[NSString alloc] initWithFormat:@"detail.html"];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *mypath = [documentsDirectory stringByAppendingPathComponent:contentFileName];
+        NSLog(@"===%@", mypath);
+        [str writeToFile:mypath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+        
+//        NSString *mypath = [[NSBundle mainBundle] pathForResource:@"detail" ofType:@"html"];
+//        NSLog(@"===%@", mypath);
+//        [str writeToFile:mypath atomically:YES encoding:NSUTF8StringEncoding error:nil];
         
         if (isMonth) {//月销售额
             MonthSaleModel *model = [[MonthSaleModel alloc] init];
