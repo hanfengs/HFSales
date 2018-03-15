@@ -48,10 +48,13 @@
                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mCa-Kr-YxN">
-                    <rect key="frame" x="299" y="502" width="46" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mCa-Kr-YxN">
+                    <rect key="frame" x="305" y="477" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="71J-0a-Ytm"/>
+                        <constraint firstAttribute="height" constant="40" id="v5A-ki-6jG"/>
+                    </constraints>
+                    <state key="normal" image="detail"/>
                     <connections>
                         <action selector="clickBtnDetail:" destination="-1" eventType="touchUpInside" id="eim-mF-CVm"/>
                     </connections>
@@ -65,13 +68,16 @@
                 <constraint firstItem="1kA-EL-Xfd" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="aeu-Rj-jJW"/>
                 <constraint firstItem="gRH-Tj-YAb" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="30" id="hTn-VC-Bzv"/>
                 <constraint firstItem="gRH-Tj-YAb" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="i6W-Ur-uZz"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="mCa-Kr-YxN" secondAttribute="trailing" constant="30" id="nsg-sn-pFB"/>
                 <constraint firstItem="TWJ-gH-i9H" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="rU1-Bg-tKh"/>
                 <constraint firstItem="TWJ-gH-i9H" firstAttribute="top" secondItem="gRH-Tj-YAb" secondAttribute="bottom" constant="30" id="tQo-aR-MKf"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="mCa-Kr-YxN" secondAttribute="bottom" constant="150" id="tW4-Eq-z5v"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
         </view>
     </objects>
     <resources>
+        <image name="detail" width="20" height="20"/>
         <namedColor name="NavColor">
             <color red="0.18823529411764706" green="0.22745098039215686" blue="0.6470588235294118" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -54,10 +54,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-//    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-//    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorNamed:@"NavColor"]];
+    [self KPSetBackgroundColor:[UIColor colorNamed:@"NavColor"]];
+//    [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
     
+//    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor redColor], NSFontAttributeName:[UIFont systemFontOfSize:17]}];
+
     self.view.backgroundColor = [UIColor colorNamed:@"BgColor"];
     _currentShopCode = @"1006";
     
@@ -364,18 +365,13 @@
 
         NSMutableString* str =[[NSMutableString alloc]initWithString:string];
         [str insertString:@"<meta charset=\"utf-8\">" atIndex:range.location];
-//
-//        ///<meta charset=\"utf-8\">
+
         NSString *contentFileName=[[NSString alloc] initWithFormat:@"detail.html"];
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
         NSString *mypath = [documentsDirectory stringByAppendingPathComponent:contentFileName];
-        NSLog(@"===%@", mypath);
-        [str writeToFile:mypath atomically:YES encoding:NSUTF8StringEncoding error:nil];
-        
-//        NSString *mypath = [[NSBundle mainBundle] pathForResource:@"detail" ofType:@"html"];
 //        NSLog(@"===%@", mypath);
-//        [str writeToFile:mypath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+        [str writeToFile:mypath atomically:YES encoding:NSUTF8StringEncoding error:nil];
         
         if (isMonth) {//月销售额
             MonthSaleModel *model = [[MonthSaleModel alloc] init];
@@ -390,8 +386,7 @@
             
         }else{//日销售额
             self.total = [self html:data];
-        }
-        
+        }        
     }] resume];
     
     if (isMonth) {
@@ -564,6 +559,27 @@
     [formatter setDateFormat:@"yyyy-MM-dd"];
     NSString *dateTime = [formatter stringFromDate:[NSDate date]];
     return dateTime;
+}
+
+#pragma mark- nav
+
+- (void)KPSetBackgroundColor:(UIColor *)color{
+    
+    UIImage *img = [self createImageWithColor:color size:CGSizeMake(1, 1)];
+
+    [self.navigationController.navigationBar setBackgroundImage:img forBarMetrics:UIBarMetricsDefault];
+}
+
+-(UIImage *)createImageWithColor:(UIColor *)color size:(CGSize)size {
+    CGRect rect = CGRectMake(0.0f, 0.0f, size.width, size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return theImage;
 }
 
 @end

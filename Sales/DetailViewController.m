@@ -21,6 +21,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    self.title = @"销售详情";
     [self.view addSubview:self.webView];
     
 //    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"detail" ofType:@"html"];

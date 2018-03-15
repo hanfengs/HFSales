@@ -24,6 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.btn_detail.hidden = YES;
     
     NSDate *yesterday = [NSDate dateWithTimeInterval:-24*60*60 sinceDate:[NSDate date]];
     
@@ -70,15 +71,17 @@
         if (![total isEqualToString:@"..."]) {
             self.btn.userInteractionEnabled = YES;
             [self.btn setTitle:@"计算该日销售总金额" forState:UIControlStateNormal];
+            
+            self.btn_detail.hidden = NO;
+//            [self.btn_detail setTitle:@"详情" forState:UIControlStateNormal];
         }
-        
-        [self.btn_detail setTitle:@"详情" forState:UIControlStateNormal];
     });
 }
 - (IBAction)clickBtnTotal:(id)sender {
     
     self.btn.userInteractionEnabled = NO;
     [self.btn setTitle:@"计算中..." forState:UIControlStateNormal];
+    self.btn_detail.hidden = YES;
     
     if ([self.delegate respondsToSelector:@selector(calculateTotal)]) {
         [self.delegate calculateTotal];
@@ -98,8 +101,8 @@
     return dateTime;
 }
 
-
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
+
 @end
