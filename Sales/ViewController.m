@@ -55,9 +55,6 @@
     [super viewDidLoad];
 
     [self KPSetBackgroundColor:[UIColor colorNamed:@"NavColor"]];
-//    [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
-    
-//    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor redColor], NSFontAttributeName:[UIFont systemFontOfSize:17]}];
 
     self.view.backgroundColor = [UIColor colorNamed:@"BgColor"];
     _currentShopCode = @"1006";
@@ -142,12 +139,12 @@
     return _tabedSlideView;
 }
 
-#pragma mark- Nav
+#pragma mark- Nav Title
 - (void)setupNavTitle{
     
     UIButton *titleBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kMainScreenWidth, 64)];
     [titleBtn setImage:[UIImage imageNamed:@"buddy_header_arrow"] forState:UIControlStateNormal];
-    [titleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [titleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [titleBtn setTitle:@"1006 丰台店" forState:UIControlStateNormal];
     titleBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     titleBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
@@ -561,7 +558,7 @@
     return dateTime;
 }
 
-#pragma mark- nav
+#pragma mark- 导航栏背景色
 
 - (void)KPSetBackgroundColor:(UIColor *)color{
     

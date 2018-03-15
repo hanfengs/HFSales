@@ -21,7 +21,12 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.title = @"销售详情";
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kMainScreenWidth/4, 0, kMainScreenWidth/2, 64)];
+    label.text = @"销售详情";
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    self.navigationItem.titleView = label;
+    
     [self.view addSubview:self.webView];
     
 //    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"detail" ofType:@"html"];
