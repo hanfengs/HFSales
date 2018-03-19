@@ -19,8 +19,6 @@
 
 #define random 100
 #define KStatusBarHeight 64
-#define kMainScreenWidth [UIScreen mainScreen].bounds.size.width
-#define KMainScreenHeight [UIScreen mainScreen].bounds.size.height
 
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource, DLTabedSlideViewDelegate, SaleViewControllerDelegate>
 

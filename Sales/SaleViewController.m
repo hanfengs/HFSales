@@ -29,8 +29,12 @@
     NSDate *yesterday = [NSDate dateWithTimeInterval:-24*60*60 sinceDate:[NSDate date]];
     
     self.tf_date.text = [self getCurrentTime:yesterday];
-    self.tf_date.textColor = [UIColor colorNamed:@"NavColor"];
-    self.btn.backgroundColor = [UIColor colorNamed:@"NavColor"];
+    if (@available(iOS 11.0, *)) {
+        self.tf_date.textColor = [UIColor colorNamed:@"NavColor"];
+        self.btn.backgroundColor = [UIColor colorNamed:@"NavColor"];
+    } else {
+        // Fallback on earlier versions
+    }
     
     UIDatePicker *picker = [[UIDatePicker alloc]init];
     picker.datePickerMode =  UIDatePickerModeDate;

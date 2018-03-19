@@ -10,8 +10,6 @@
 #import "QFDatePickerView.h"
 #import "MonthSaleTableCell.h"
 
-#define kMainScreenWidth [UIScreen mainScreen].bounds.size.width
-#define KMainScreenHeight [UIScreen mainScreen].bounds.size.height
 
 @interface MonthSaleViewController ()<UITableViewDelegate, UITableViewDataSource>
 

@@ -8,8 +8,6 @@
 
 #import "DetailViewController.h"
 
-#define kMainScreenWidth [UIScreen mainScreen].bounds.size.width
-#define KMainScreenHeight [UIScreen mainScreen].bounds.size.height
 
 @interface DetailViewController ()<UIWebViewDelegate>
 @property (copy, nonatomic) UIWebView *webView;
