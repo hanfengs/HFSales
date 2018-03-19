@@ -30,6 +30,7 @@
     
     self.tf_date.text = [self getCurrentTime:yesterday];
     self.tf_date.textColor = [UIColor colorNamed:@"NavColor"];
+    self.btn.backgroundColor = [UIColor colorNamed:@"NavColor"];
     
     UIDatePicker *picker = [[UIDatePicker alloc]init];
     picker.datePickerMode =  UIDatePickerModeDate;

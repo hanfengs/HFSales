@@ -29,6 +29,8 @@
     [super viewDidLoad];
     
     self.lbl_month.text = [self getCurrentTime:[NSDate date]];
+    self.lbl_month.textColor = [UIColor colorNamed:@"NavColor"];
+    self.btn.backgroundColor = [UIColor colorNamed:@"NavColor"];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleMonthPicker:)];
     self.lbl_month.userInteractionEnabled = YES;
