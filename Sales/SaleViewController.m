@@ -34,6 +34,8 @@
         self.btn.backgroundColor = [UIColor colorNamed:@"NavColor"];
     } else {
         // Fallback on earlier versions
+        self.tf_date.textColor = UIColorFromRGB(NavColor);
+        self.btn.backgroundColor = UIColorFromRGB(NavColor);
     }
     
     UIDatePicker *picker = [[UIDatePicker alloc]init];

@@ -52,9 +52,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self KPSetBackgroundColor:[UIColor colorNamed:@"NavColor"]];
 
-    self.view.backgroundColor = [UIColor colorNamed:@"BgColor"];
+    if (@available(iOS 11.0, *)) {
+        [self KPSetBackgroundColor:[UIColor colorNamed:@"NavColor"]];
+        self.view.backgroundColor = [UIColor colorNamed:@"BgColor"];
+    } else {
+        [self KPSetBackgroundColor:UIColorFromRGB(NavColor)];
+        self.view.backgroundColor = UIColorFromRGB(BgColor);
+    }
     _currentShopCode = @"1006";
     
     shopArr = @[@"0000 永旺（北京)", @"1001 国际商城店", @"1002 朝北大悦城店", @"1003 天津泰达店",@"1004 天津中北店", @"1005 天津梅江店", @"1006 丰台店",@"1007 河北燕郊店", @"1008 天津天河城店", @"1009 天津津南店",@"1995 国际商城店(外仓2)", @"1996 北京永旺低温物流中心", @"1997 国际商城店(外仓)",@"1998 虚拟店铺", @"1999 北京永旺物流中心"];
@@ -71,9 +76,14 @@
 - (void)setupSubVC{
     self.tabedSlideView.baseViewController = self;
     self.tabedSlideView.tabItemNormalColor = [UIColor blackColor];
-    self.tabedSlideView.tabItemSelectedColor = [UIColor colorNamed:@"totalColor"];//[UIColor colorWithRed:0.833 green:0.052 blue:0.130 alpha:1.000];
-    self.tabedSlideView.tabbarTrackColor = [UIColor colorNamed:@"totalColor"];//[UIColor colorWithRed:0.833 green:0.052 blue:0.130 alpha:1.000];
-    //    self.tabedSlideView.tabbarBackgroundImage = [UIImage imageNamed:@"mask_navbar"];
+    if (@available(iOS 11.0, *)) {
+        self.tabedSlideView.tabItemSelectedColor = [UIColor colorNamed:@"totalColor"];//[UIColor colorWithRed:0.833 green:0.052 blue:0.130 alpha:1.000];
+        self.tabedSlideView.tabbarTrackColor = [UIColor colorNamed:@"totalColor"];//[UIColor colorWithRed:0.833 green:0.052 blue:0.130 alpha:1.000];
+        //    self.tabedSlideView.tabbarBackgroundImage = [UIImage imageNamed:@"mask_navbar"];
+    } else {
+        self.tabedSlideView.tabItemSelectedColor = UIColorFromRGB(totalColor);
+        self.tabedSlideView.tabbarTrackColor = UIColorFromRGB(totalColor);
+    }
     self.tabedSlideView.tabbarBottomSpacing = 0;
     
     DLTabedbarItem *item1 = [DLTabedbarItem itemWithTitle:@"按日查询" image:nil selectedImage:nil];

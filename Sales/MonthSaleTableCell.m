@@ -27,7 +27,11 @@
     MonthSaleTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"MonthSaleTableCell" owner:self options:nil] lastObject];
-        cell.backgroundColor = [UIColor colorNamed:@"BgColor"];
+        if (@available(iOS 11.0, *)) {
+            cell.backgroundColor = [UIColor colorNamed:@"BgColor"];
+        } else {
+            cell.backgroundColor = UIColorFromRGB(BgColor);
+        }
     }
     return cell;
 }
