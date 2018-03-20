@@ -14,8 +14,8 @@
 #import "MonthSaleTableCell.h"
 #import "Ono.h"
 
-#define TxtUser @""
-#define TxtPassword @""
+#define TxtUser @"1000000006"
+#define TxtPassword @"111111"
 
 #define random 100
 #define KStatusBarHeight 64

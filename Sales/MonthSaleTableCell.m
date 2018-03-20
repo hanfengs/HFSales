@@ -46,7 +46,14 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    
+    if (@available(iOS 11.0, *)) {
+        self.lbl_day.textColor = [UIColor colorNamed:@"totalColor"];
+        self.lbl_total.textColor = [UIColor colorNamed:@"totalColor"];
+    } else {
+        self.lbl_day.textColor = UIColorFromRGB(totalColor);
+        self.lbl_total.textColor = UIColorFromRGB(totalColor);
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -32,10 +32,13 @@
     if (@available(iOS 11.0, *)) {
         self.tf_date.textColor = [UIColor colorNamed:@"NavColor"];
         self.btn.backgroundColor = [UIColor colorNamed:@"NavColor"];
+        self.lbl_total.textColor = [UIColor colorNamed:@"totalColor"];
+        self.btn_detail.backgroundColor = [UIColor colorNamed:@"totalColor"];
     } else {
-        // Fallback on earlier versions
         self.tf_date.textColor = UIColorFromRGB(NavColor);
         self.btn.backgroundColor = UIColorFromRGB(NavColor);
+        self.lbl_total.textColor = UIColorFromRGB(totalColor);
+        self.btn_detail.backgroundColor = UIColorFromRGB(totalColor);
     }
     
     UIDatePicker *picker = [[UIDatePicker alloc]init];
