@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6A54909B20564BB3004BEB90 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A54909A20564BB3004BEB90 /* libxml2.tbd */; };
+		6A583AC720610E74001C6571 /* feng.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 6A583AC620610E74001C6571 /* feng.p12 */; };
 		6A6A95E72057CBBE0091E416 /* MonthSaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A95E52057CBBE0091E416 /* MonthSaleViewController.m */; };
 		6A6A95E82057CBBE0091E416 /* MonthSaleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A6A95E62057CBBE0091E416 /* MonthSaleViewController.xib */; };
 		6A6A95EC2057CDE60091E416 /* QFDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A95EA2057CDE60091E416 /* QFDatePickerView.m */; };
@@ -39,6 +40,7 @@
 		4F9AD6E0DD45285980590E5A /* Pods-Sales.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sales.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sales/Pods-Sales.release.xcconfig"; sourceTree = "<group>"; };
 		55D9BF925E1AE7560D83B2AB /* Pods-Sales.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sales.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sales/Pods-Sales.debug.xcconfig"; sourceTree = "<group>"; };
 		6A54909A20564BB3004BEB90 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		6A583AC620610E74001C6571 /* feng.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = feng.p12; sourceTree = "<group>"; };
 		6A6A95E42057CBBE0091E416 /* MonthSaleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonthSaleViewController.h; sourceTree = "<group>"; };
 		6A6A95E52057CBBE0091E416 /* MonthSaleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonthSaleViewController.m; sourceTree = "<group>"; };
 		6A6A95E62057CBBE0091E416 /* MonthSaleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MonthSaleViewController.xib; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				6AAF3B75205A4C4900FCC36F /* DetailViewController.h */,
 				6AAF3B76205A4C4900FCC36F /* DetailViewController.m */,
 				6AAF3B78205A522E00FCC36F /* detail.html */,
+				6A583AC620610E74001C6571 /* feng.p12 */,
 				6A7B1534204FF92200EFC9B8 /* Assets.xcassets */,
 				6A7B1536204FF92200EFC9B8 /* LaunchScreen.storyboard */,
 				6A7B1539204FF92200EFC9B8 /* Info.plist */,
@@ -283,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A6A95E82057CBBE0091E416 /* MonthSaleViewController.xib in Resources */,
+				6A583AC720610E74001C6571 /* feng.p12 in Resources */,
 				6A7B1538204FF92200EFC9B8 /* LaunchScreen.storyboard in Resources */,
 				6A7B1535204FF92200EFC9B8 /* Assets.xcassets in Resources */,
 				6A7B1533204FF92200EFC9B8 /* Main.storyboard in Resources */,
