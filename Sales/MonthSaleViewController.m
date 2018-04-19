@@ -61,6 +61,12 @@
             self.btn.userInteractionEnabled = YES;
             [self.btn setTitle:@"计算该月销售总金额" forState:UIControlStateNormal];
         }
+        
+        if (monthArr.count > 0) {
+            
+            NSIndexPath *indexpath = [NSIndexPath indexPathForRow:monthArr.count - 1 inSection:0];
+            [self.tableView scrollToRowAtIndexPath:indexpath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
     });
 }
 

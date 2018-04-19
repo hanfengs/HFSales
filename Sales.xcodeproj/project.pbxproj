@@ -505,7 +505,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JEAYLPQ773;
+				DEVELOPMENT_TEAM = 39R6VHSDLS;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Sales/PrefixHeader.pch";
 				INFOPLIST_FILE = Sales/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -524,7 +524,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JEAYLPQ773;
+				DEVELOPMENT_TEAM = 39R6VHSDLS;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Sales/PrefixHeader.pch";
 				INFOPLIST_FILE = Sales/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
